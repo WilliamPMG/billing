@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import com.paymentchain.billing.respository.InvoiceRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
 
@@ -25,6 +29,7 @@ import org.springframework.http.HttpStatus;
  *
  * @author sotobotero
  */
+@Tag(name = "Billing API", description = "Api para consultar pagos")
 @RestController
 @RequestMapping("/billing")
 public class InvoiceRestController {
@@ -32,6 +37,10 @@ public class InvoiceRestController {
     @Autowired
     InvoiceRepository billingRepository;
     
+    @Operation(description = "Retorna todas las facturas", summary = "Retorna 204 si la data esta correcto")
+    @ApiResponses(value ={@ApiResponse(responseCode = "200", description = "EXITO"),
+    @ApiResponse(responseCode = "500", description = "Internal Error")
+    })
     @GetMapping()
     public List<Invoice> list() {
         return billingRepository.findAll();
