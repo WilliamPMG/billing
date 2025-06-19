@@ -5,6 +5,8 @@
  */
 package com.paymentchain.billing.controller;
 
+import com.paymentchain.billing.controller.common.InvoiceRequestMapper;
+import com.paymentchain.billing.controller.common.InvoiceResponseMapper;
 import com.paymentchain.billing.dto.InvoiceRequest;
 import com.paymentchain.billing.dto.InvoiceResponse;
 import com.paymentchain.billing.entities.Invoice;
@@ -39,14 +41,21 @@ public class InvoiceRestController {
     @Autowired
     InvoiceRepository billingRepository;
     
+    @Autowired
+    InvoiceRequestMapper requestInvoice;
+    
+    @Autowired
+    InvoiceResponseMapper responseInvoice;
+    
+    
     @Operation(description = "Retorna todas las facturas", summary = "Retorna 204 si la data esta correcto")
     @ApiResponses(value ={@ApiResponse(responseCode = "200", description = "EXITO"),
     @ApiResponse(responseCode = "500", description = "Internal Error")
     })
     @GetMapping()
     public List<InvoiceResponse> list() {
-        //return billingRepository.findAll();
-        return null;
+       List<Invoice> findAll =  billingRepository.findAll();
+        return responseInvoice.InvoiceListToInvoiceResponceList(findAll);
     }
     
     @GetMapping("/{id}")
@@ -66,8 +75,10 @@ public class InvoiceRestController {
     
     @PostMapping
     public ResponseEntity<?> post(@RequestBody InvoiceRequest input) {
-        //Invoice save = billingRepository.save(input);
-        return null; //ResponseEntity.ok(save);
+        Invoice invoiceRequestToInvoice = requestInvoice.InvoiceRequestToInvoice(input);
+        Invoice save = billingRepository.save(invoiceRequestToInvoice);
+        InvoiceResponse invoiceToInvoiceResponse = responseInvoice.InvoiceToInvoiceResponse(save);
+        return ResponseEntity.ok(invoiceToInvoiceResponse);
     }
     
     @DeleteMapping("/{id}")
