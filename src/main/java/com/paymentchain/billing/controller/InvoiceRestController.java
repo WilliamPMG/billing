@@ -5,8 +5,8 @@
  */
 package com.paymentchain.billing.controller;
 
-import com.paymentchain.billing.controller.common.InvoiceRequestMapper;
-import com.paymentchain.billing.controller.common.InvoiceResponseMapper;
+import com.paymentchain.billing.common.InvoiceRequestMapper;
+import com.paymentchain.billing.common.InvoiceResponseMapper;
 import com.paymentchain.billing.dto.InvoiceRequest;
 import com.paymentchain.billing.dto.InvoiceResponse;
 import com.paymentchain.billing.entities.Invoice;

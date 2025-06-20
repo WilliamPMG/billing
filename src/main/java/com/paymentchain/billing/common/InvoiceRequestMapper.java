@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.paymentchain.billing.controller.common;
+package com.paymentchain.billing.common;
 
 import com.paymentchain.billing.dto.InvoiceRequest;
 import com.paymentchain.billing.entities.Invoice;

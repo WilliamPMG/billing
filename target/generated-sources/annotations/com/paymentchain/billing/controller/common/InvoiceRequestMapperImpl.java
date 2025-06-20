@@ -1,5 +1,6 @@
 package com.paymentchain.billing.controller.common;
 
+import com.paymentchain.billing.common.InvoiceRequestMapper;
 import com.paymentchain.billing.dto.InvoiceRequest;
 import com.paymentchain.billing.entities.Invoice;
 import java.util.ArrayList;
